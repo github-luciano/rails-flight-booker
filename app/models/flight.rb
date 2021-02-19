@@ -1,4 +1,4 @@
 class Flight < ApplicationRecord
-  belongs_to :from_airport
-  belongs_to :to_airport
+  belongs_to :departing, class_name: 'Airport'
+  belongs_to :arriving, class_name: 'Airport'
 end
