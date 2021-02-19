@@ -29,6 +29,6 @@ ActiveRecord::Schema.define(version: 2021_02_19_190130) do
     t.index ["to_airport_id"], name: "index_flights_on_to_airport_id"
   end
 
-  add_foreign_key "flights", "airports", column: "from_airport_id" #to make sure the foreign key was generated correclty, the add_foreign_key should look like you see there
+  add_foreign_key "flights", "airports", column: "from_airport_id"
   add_foreign_key "flights", "airports", column: "to_airport_id"
 end
