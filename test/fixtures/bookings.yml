@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  primary: one
+  passenger2: one
+  passenger3: one
+  passenger4: one
+  flight: one
+
+two:
+  primary: two
+  passenger2: two
+  passenger3: two
+  passenger4: two
+  flight: two
