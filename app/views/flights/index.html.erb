@@ -1,0 +1,11 @@
+<h1>Homepage</h1>
+<h2>Search your flight</h2>
+<p>put form here</p>
+<h2>Available flights</h2>
+<% @flight.where("datetime > ?", Time.now).order('datetime').each do |flight| %> <%#the .where(ecc) indexes only the future flights, avoids all the past flights that will still be conserved in the database%>
+  <ul>
+    <li>
+      <p>From: <%= flight.departing_airport.code %> | To: <%= flight.arriving_airport.code %> | Flight duration: <%= flight.flight_duration %> min | Date: <%= flight.datetime.to_date %> </p>
+    </li>
+  </ul>
+<% end %>
