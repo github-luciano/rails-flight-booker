@@ -5,12 +5,12 @@
   <%# f.select(:from_airport_id, @flight_options) %>
   <%# f.submit %>
 <%# end %>
-<%= form_with(url: "/flights", method: "get", local: true) do %>
+<%= form_with(url: "/flights", method: "get", local: true) do |f| %>
   <% @airport_options = Airport.all.map { |airport| [airport.code, airport.id] } %>
-  <%= select_tag(:from_airport_id, options_for_select(@airport_options, selected: params[:from_airport_id]), { prompt: 'From?' }) %>
-  <%= select_tag(:to_airport_id, options_for_select(@airport_options, selected: params[:to_airport_id]), { prompt: 'To?' }) %>
-  <%= date_field('datetime') %>
-  <%= submit_tag("Show flights") %>
+  <%= f.select(:from_airport_id, @airport_options, { prompt: 'From?' }) %>
+  <%= f.select(:to_airport_id, @airport_options, { prompt: 'To?' }) %>
+  <%= f.date_field('datetime') %>
+  <%= f.submit("Show flights") %>
 <% end %>
 
 <%# if @available_flights.any? %>
