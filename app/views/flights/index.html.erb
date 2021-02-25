@@ -13,6 +13,21 @@
   <%= f.submit("Show flights") %>
 <% end %>
 
+
+
+
+<% if @available_flights %>
+  <% if @available_flights.any? %>
+    <% @available_flights.where("datetime > ?", Time.now).order('datetime').each do |flight| %> <%#the .where(ecc) indexes only the future flights, avoids all the past flights that will still be conserved in the database%>
+      <h2>Available flights</h2>
+      <p>From: <%= flight.departing_airport.code %> | To: <%= flight.arriving_airport.code %> | Flight duration: <%= flight.flight_duration %> min | Date: <%= flight.datetime.to_date %> </p>
+      <p>hi</p>
+    <% end %>
+  <% else %>
+    <p>No flights available</p>
+  <% end %>
+<% end %>
+
 <%# @airport_options = Airport.all.map { |airport| [airport.code, airport.id] } %>
   <%# select_tag(:from_airport_id, options_for_select(@airport_options, selected: params[:from_airport_id]), { prompt: 'From?' }) %>
   <%# select_tag(:to_airport_id, options_for_select(@airport_options, selected: params[:to_airport_id]), { prompt: 'To?' }) %>
@@ -29,9 +44,5 @@
   <%# submit_tag 'Search' %>
 <%# end %>
 
-<h2>Available flights</h2>
-<% @available_flights.where("datetime > ?", Time.now).order('datetime').each do |flight| %> <%#the .where(ecc) indexes only the future flights, avoids all the past flights that will still be conserved in the database%>
-  <p>From: <%= flight.departing_airport.code %> | To: <%= flight.arriving_airport.code %> | Flight duration: <%= flight.flight_duration %> min | Date: <%= flight.datetime.to_date %> </p>
-  <p>hi</p>
-<% end %>
+
 
