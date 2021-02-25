@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :airports
   resources :passengers
-  resources :flights
+  resources :flights, only: [:index]
   resources :bookings
 
 end
