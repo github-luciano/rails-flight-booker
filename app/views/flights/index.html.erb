@@ -9,7 +9,7 @@
   <% @airport_options = Airport.all.map { |airport| [airport.code, airport.id] } %>
   <%= f.select(:from_airport_id, @airport_options, { prompt: 'From?' }) %>
   <%= f.select(:to_airport_id, @airport_options, { prompt: 'To?' }) %>
-  <%= f.date_field('datetime').attr('disabled', true) %>
+  <%= f.date_field('datetime') %>
   <%= f.submit("Show flights") %>
 <% end %>
 
