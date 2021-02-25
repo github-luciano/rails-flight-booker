@@ -1,7 +1,7 @@
 class FlightsController < ApplicationController
 
   def index
-    if params[:datetime] != ""
+    if params[:datetime] != "" #datetime gets deleted from params if it is empty, so if the user doesnt input the date he can see all the flights to the selected airportts that will take place in the future
       @available_flights = Flight.where(flight_params)
     else
       params.delete(:datetime)
