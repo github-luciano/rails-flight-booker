@@ -5,11 +5,17 @@
   <%# f.select(:from_airport_id, @flight_options) %>
   <%# f.submit %>
 <%# end %>
+<% flash.each do |type, msg| %>
+  <div style="color:red">
+    <%= msg %>
+  </div><br>
+<% end %>
+
 <%= form_with(url: "/flights", method: "get", local: true) do |f| %>
   <% @airport_options = Airport.all.map { |airport| [airport.code, airport.id] } %>
-  <%= f.select(:from_airport_id, @airport_options, { prompt: 'From?' }) %>
-  <%= f.select(:to_airport_id, @airport_options, { prompt: 'To?' }) %>
-  <%= f.date_field('datetime') %>
+  <%= f.select(:from_airport_id, @airport_options, selected: params[:from_airport_id], prompt: 'From?' ) %> <%# the "selected" keeps the values inserted by the user. Otherwise they would get resetted after he searched for the flights %>
+  <%= f.select(:to_airport_id, @airport_options, selected: params[:to_airport_id], prompt: 'To?' ) %>
+  <%= f.date_field('datetime', value: params[:datetime]) %> <%# the "value" is the equivalent of "selected" in the selects. It keeps the values inserted by the user between searches %>
   <%= f.submit("Show flights") %>
 <% end %>
 
@@ -24,7 +30,7 @@
       <p>hi</p>
     <% end %>
   <% else %>
-    <p>No flights available</p>
+    <p>No flights available to the chosen destinations</p>
   <% end %>
 <% end %>
 
