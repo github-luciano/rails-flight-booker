@@ -24,7 +24,7 @@ end
 
   private
   def flight_params
-    params.permit(:from_airport_id, :to_airport_id, :datetime)
+    params.permit(:from_airport_id, :to_airport_id, :datetime, :seats)
     
   end
 

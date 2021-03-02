@@ -16,6 +16,7 @@
   <%= f.select(:from_airport_id, @airport_options, selected: params[:from_airport_id], prompt: 'From?' ) %> <%# the "selected" keeps the values inserted by the user. Otherwise they would get resetted after he searched for the flights %>
   <%= f.select(:to_airport_id, @airport_options, selected: params[:to_airport_id], prompt: 'To?' ) %>
   <%= f.date_field('datetime', value: params[:datetime]) %> <%# the "value" is the equivalent of "selected" in the selects. It keeps the values inserted by the user between searches %>
+  Seats: <%= fselect(:params, :seats, (1..4).map {|i| [i,i]}, selected: params[:seats]) %> <%# makes a form to select the seats, which value (below) will be transmitted and used to the NEW booking, using the hidden form. It will serve to decide how many forms to render (1 for each passenger that will take the seat) %>
   <%= f.submit("Show flights") %>
 <% end %>
 
@@ -32,6 +33,7 @@
       <p>No flights available to the chosen destinations</p>
     <% end %>
   <% end %>
+  <%= hidden_field_tag :seats, params[:seats] %>
   <%= f.submit "Next" %>
 <% end %>
 
