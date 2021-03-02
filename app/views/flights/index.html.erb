@@ -23,8 +23,8 @@
 
 <%= form_with(url: "/new_booking", method: "get") do |f| %>
   <% if @available_flights %>
-    <% if @available_flights.any? %>
-      <% @available_flights.where("datetime > ?", Time.now).order('datetime').each do |flight| %> <%#the .where(ecc) indexes only the future flights, avoids all the past flights that will still be conserved in the database%>
+    <% if @available_flights.where("datetime > ?", Time.now).any? %>
+      <% @available_flights.order('datetime').each do |flight| %> <%#the .where(ecc) indexes only the future flights, avoids all the past flights that will still be conserved in the database%>
         <h2>Available flights</h2>
         <p>From: <%= flight.departing_airport.code %> | To: <%= flight.arriving_airport.code %> | Flight duration: <%= flight.flight_duration %> min | Date: <%= flight.datetime.to_date %> </p>
       <% end %>
