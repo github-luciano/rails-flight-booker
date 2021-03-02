@@ -21,12 +21,12 @@
 
 
 
-<%= form_with(url: "/new_booking", method: "get") do |f| %>
+<%= form_with(url: "bookings/new", method: "get") do |f| %>
   <% if @available_flights %>
     <% if @available_flights.where("datetime > ?", Time.now).any? %>
       <% @available_flights.order('datetime').each do |flight| %> <%#the .where(ecc) indexes only the future flights, avoids all the past flights that will still be conserved in the database%>
         <h2>Available flights</h2>
-        <p>From: <%= flight.departing_airport.code %> | To: <%= flight.arriving_airport.code %> | Flight duration: <%= flight.flight_duration %> min | Date: <%= flight.datetime.to_date %> </p>
+        <p><%= radio_button_tag(:flight, flight.id) %> From: <%= flight.departing_airport.code %> | To: <%= flight.arriving_airport.code %> | Flight duration: <%= flight.flight_duration %> min | Date: <%= flight.datetime.to_date %> </p>
       <% end %>
     <% else %>
       <p>No flights available to the chosen destinations</p>
