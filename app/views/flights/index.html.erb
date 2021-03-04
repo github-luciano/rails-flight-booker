@@ -27,17 +27,16 @@
 <%= form_with(url: "bookings/new", method: "get") do |f| %>
   <% if @available_flights %>
     <% if @available_flights.where("datetime > ?", Time.now).any? %>
-      <% @available_flights.order('datetime').each do |flight| %> <%#the .where(ecc) indexes only the future flights, avoids all the past flights that will still be conserved in the database%>
-        <h2>Available flights</h2>
-        <p><%= radio_button_tag(:flight, flight.id) %> From: <%= flight.departing_airport.code %> | To: <%= flight.arriving_airport.code %> | Flight duration: <%= flight.flight_duration %> min | Date: <%= flight.datetime.to_date %><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of seats: <%= select_tag(:seats, options_for_select((1..4).map {|i| [i,i]} ), prompt: 'Select' ) %> </p>
+    <h2>Available flights</h2>
+      <% @available_flights.order('datetime').each do |flight| %> <%#the .where(ecc) indexes only the future flights, avoids all the past flights that will still be conserved in the database%>   
+        <p><%= radio_button_tag(:flight, flight.id, required = true) %> From: <%= flight.departing_airport.code %> | To: <%= flight.arriving_airport.code %> | Flight duration: <%= flight.flight_duration %> min | Date: <%= flight.datetime.to_date %></p>
       <% end %>
     <% else %>
       <p>No flights available to the chosen destinations</p>
     <% end %>
   <% end %>
-  <%# inser the seats here and make an error message if the user does not input the number of seats he wants %>
-  <%# hidden_field_tag :seats, params[:seats] %>
+  <%# I wanted to make an individual select seats dropdown for each flight but I couldnt find a way to link the dropdown menu to the radio button. Only the last dropdown menu was working, all the others from the other flights were not. %>
+  <p>Number of seats: <%= select_tag(:seats, options_for_select((1..4).map {|i| [i,i]} ), prompt: 'Select', required: 'true') %></p>
   <%= f.submit "Next" %>
 <% end %>
 
