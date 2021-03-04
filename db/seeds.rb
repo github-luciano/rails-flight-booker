@@ -22,4 +22,7 @@ Flight.create(from_airport_id: 2, to_airport_id: 2, datetime: "15-5-2015".to_dat
 Flight.create(from_airport_id: 3, to_airport_id: 4, datetime: "14-7-2026".to_date, flight_duration: 70)
 Flight.create(from_airport_id: 4, to_airport_id: 1, datetime: "3-3-2023".to_date, flight_duration: 40)
 Flight.create(from_airport_id: 2, to_airport_id: 3, datetime: "28-9-2021".to_date, flight_duration: 80)
+Flight.create(from_airport_id: 2, to_airport_id: 3, datetime: "28-9-2022".to_date, flight_duration: 81)
+Flight.create(from_airport_id: 2, to_airport_id: 3, datetime: "28-9-2023".to_date, flight_duration: 82)
+Flight.create(from_airport_id: 2, to_airport_id: 3, datetime: "28-9-2024".to_date, flight_duration: 83)
 
