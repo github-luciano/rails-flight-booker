@@ -7,17 +7,20 @@ class BookingsController < ApplicationController
   end
 
   def create
+    @flight = Flight.find_by(id: params[:flight])
+    @seats = params[:seats].to_i
     @booking = Booking.new(booking_params)
     if @booking.save
       redirect_to flights_path
     else
-      render :new
+      redirect_to new_booking_path(:flight => params[:flight], :seats => params[:seats].to_i )
+      flash.now[:alert] = "Please insert destination airport"
     end
   end
 
   private
   def booking_params
-    params.require(:booking).permit(:primary_id, :passenger2_id, :passenger3_id, :passenger4_id, :flight_id, :email, :billing, passengers_attributes: [ :name, :surname ])
+    params.require(:booking).permit(:flight, :seats, :primary_id, :passenger2_id, :passenger3_id, :passenger4_id, :flight_id, :email, :billing, passengers_attributes: [ :name, :surname ])
   end
 
 end
