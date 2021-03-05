@@ -19,7 +19,7 @@
   <%= f.date_field('datetime', value: params[:datetime]) %> <%# the "value" is the equivalent of "selected" in the selects. It keeps the values inserted by the user between searches %>
   <%# select_tag(:params, :seats, (1..4).map {|i| [i,i]}, selected: params[:seats]) %> <%# makes a form to select the seats, which value (below) will be transmitted and used to the NEW booking, using the hidden form. It will serve to decide how many forms to render (1 for each passenger that will take the seat) %>
   <%= f.submit("Show flights") %>
-<% end %>
+<% end %><br>
 
 
 
