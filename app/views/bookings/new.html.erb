@@ -9,6 +9,11 @@ From: <%= @flight.departing_airport.code %> | To: <%= @flight.arriving_airport.c
 
 <% end %>
 
+<% flash.each do |type, msg| %>
+  <div style="color:red">
+    <%= msg %>
+  </div><br>
+<% end %>
 
 <% @seats.times do %>
 hi
