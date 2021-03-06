@@ -18,6 +18,7 @@ class BookingsController < ApplicationController
     @seats = params[:seats].to_i
     @booking = Booking.new(booking_params)
     if @booking.save
+      #remove the passenger ids from the bookings because when the user fills everything you dont have a way to get the passenger ids before they get submitted to the database. Instead make a table that connects each passenger with the booking. The connection occurs here in the controller, after the booking (and the passengers in the nested params) is saved.
       redirect_to flights_path
     else
       #redirect_to new_booking_path(:flight => params[:flight], :seats => params[:seats].to_i )  #this is not necessary anymore since the params are submitted with a hidden field in the form (it also didnt work very well)
