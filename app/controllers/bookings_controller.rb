@@ -21,7 +21,7 @@ class BookingsController < ApplicationController
       redirect_to flights_path
     else
       #redirect_to new_booking_path(:flight => params[:flight], :seats => params[:seats].to_i )  #this is not necessary anymore since the params are submitted with a hidden field in the form (it also didnt work very well)
-      flash.now[:alert] = "Something went wrong. Please be sure that informations are coorect."
+      flash.now[:alert] = "Something went wrong. Please be sure that informations are correct."
       render :new
       
     end
