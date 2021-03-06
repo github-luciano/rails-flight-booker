@@ -5,6 +5,7 @@ From: <%= @flight.departing_airport.code %> | To: <%= @flight.arriving_airport.c
 <%= form_with model: @booking do |f| %>
   <%= f.text_field :email %>
   <%= f.number_field :billing %>
+  <%= hidden_field_tag('flight', params[:flight]) %>
   <%= f.submit %>
 
 <% end %>
