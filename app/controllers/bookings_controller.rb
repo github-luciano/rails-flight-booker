@@ -20,15 +20,16 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to flights_path
     else
-      #redirect_to new_booking_path(:flight => params[:flight], :seats => params[:seats].to_i )
+      #redirect_to new_booking_path(:flight => params[:flight], :seats => params[:seats].to_i )  #this is not necessary anymore since the params are submitted with a hidden field in the form (it also didnt work very well)
+      flash.now[:alert] = "Please insert destination airport"
       render :new
-      #flash[:alert] = "Please insert destination airport"
+      
     end
   end
 
   private
   def booking_params
-    params.require(:booking).permit(:flight, :seats, :primary_id, :passenger2_id, :passenger3_id, :passenger4_id, :flight_id, :email, :billing, passengers_attributes: [ :name, :surname ])
+    params.require(:booking).permit(:primary_id, :passenger2_id, :passenger3_id, :passenger4_id, :flight_id, :email, :billing, passengers_attributes: [ :name, :surname ])
   end
 
 end
