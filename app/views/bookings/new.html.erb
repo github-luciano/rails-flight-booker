@@ -3,10 +3,21 @@ From: <%= @flight.departing_airport.code %> | To: <%= @flight.arriving_airport.c
 <br><br><br>
 
 <%= form_with model: @booking do |f| %>
+  <%= f.label :email, "Email: " %>
   <%= f.text_field :email %>
+  <%= f.label :billing, "Billing: " %>
   <%= f.number_field :billing %>
   <%= hidden_field_tag('flight', params[:flight]) %>
-  <%= f.submit %>
+    <% @seats.times do |i| %>
+      <h2>Passenger</h2><%= i %>
+      <%= f.fields_for @booking.passengers.build do |p| %>
+        <%= p.label :name, "Name: " %>
+        <%= p.text_field :name %>
+        <%= p.label :surname, "Surname: " %>
+        <%= p.text_field :surname %>
+      <% end %>
+    <% end %>
+  <br><br><%= f.submit %>
 
 <% end %>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_171253) do
+ActiveRecord::Schema.define(version: 2021_03_06_163756) do
 
   create_table "airports", force: :cascade do |t|
     t.text "code"
@@ -19,20 +19,12 @@ ActiveRecord::Schema.define(version: 2021_02_21_171253) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.integer "primary_id", null: false
-    t.integer "passenger2_id"
-    t.integer "passenger3_id"
-    t.integer "passenger4_id"
     t.integer "flight_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "email"
     t.integer "billing"
     t.index ["flight_id"], name: "index_bookings_on_flight_id"
-    t.index ["passenger2_id"], name: "index_bookings_on_passenger2_id"
-    t.index ["passenger3_id"], name: "index_bookings_on_passenger3_id"
-    t.index ["passenger4_id"], name: "index_bookings_on_passenger4_id"
-    t.index ["primary_id"], name: "index_bookings_on_primary_id"
   end
 
   create_table "flights", force: :cascade do |t|
@@ -46,6 +38,15 @@ ActiveRecord::Schema.define(version: 2021_02_21_171253) do
     t.index ["to_airport_id"], name: "index_flights_on_to_airport_id"
   end
 
+  create_table "passenger_bookings", force: :cascade do |t|
+    t.integer "passengers_id", null: false
+    t.integer "bookings_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bookings_id"], name: "index_passenger_bookings_on_bookings_id"
+    t.index ["passengers_id"], name: "index_passenger_bookings_on_passengers_id"
+  end
+
   create_table "passengers", force: :cascade do |t|
     t.text "name"
     t.text "surname"
@@ -54,10 +55,8 @@ ActiveRecord::Schema.define(version: 2021_02_21_171253) do
   end
 
   add_foreign_key "bookings", "flights"
-  add_foreign_key "bookings", "passengers", column: "passenger2_id"
-  add_foreign_key "bookings", "passengers", column: "passenger3_id"
-  add_foreign_key "bookings", "passengers", column: "passenger4_id"
-  add_foreign_key "bookings", "passengers", column: "primary_id"
   add_foreign_key "flights", "airports", column: "from_airport_id"
   add_foreign_key "flights", "airports", column: "to_airport_id"
+  add_foreign_key "passenger_bookings", "bookings", column: "bookings_id"
+  add_foreign_key "passenger_bookings", "passengers", column: "passengers_id"
 end
