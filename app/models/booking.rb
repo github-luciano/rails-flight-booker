@@ -1,7 +1,7 @@
 class Booking < ApplicationRecord
   #belongs_to :primary, class_name: 'Passenger', foreign_key: 'primary_id'
   belongs_to :flight, class_name: 'Flight', foreign_key: 'flight_id'
-  has_many :passenger_bookings, inverse_of: :booking
+  has_many :passenger_bookings
   has_many :passengers, :through => :passenger_bookings
 
 
