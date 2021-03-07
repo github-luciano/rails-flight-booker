@@ -8,14 +8,10 @@ From: <%= @flight.departing_airport.code %> | To: <%= @flight.arriving_airport.c
   <%= f.label :billing, "Billing: " %>
   <%= f.number_field :billing %>
   <%= hidden_field_tag('flight', params[:flight]) %>
+  <%= hidden_field_tag('seats', params[:seats]) %>
     <% @seats.times do |i| %>
-      <h2>Passenger</h2><%= i %>
-      <%= f.fields_for @booking.passengers.build do |p| %>
-        <%= p.label :name, "Name: " %>
-        <%= p.text_field :name %>
-        <%= p.label :surname, "Surname: " %>
-        <%= p.text_field :surname %>
-      <% end %>
+      <h2>Passenger <%= i+1 %></h2>
+
     <% end %>
   <br><br><%= f.submit %>
 
