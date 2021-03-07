@@ -1,9 +1,12 @@
 class BookingsController < ApplicationController
 
   def new
+    @booking = Booking.new
     @flight = Flight.find_by(id: params[:flight]) #the flight params with the ID gets submitted from the flights index form. The ID that is submitted is the ID of the flight that the user has chosen with the radio button
     @seats = params[:seats].to_i
-    @booking = Booking.new
+    @passenger_bookings = @booking.passenger_bookings.build
+    @passenger = @passenger_bookings.build_passenger
+
   end
 
   def create
@@ -14,9 +17,9 @@ class BookingsController < ApplicationController
     #sent on the first attempt to complete the form and that are then lost when the RENDER :NEW gets
     #executed, I have made some hidden field tags in the new.html.erb that will re-submit those 
     #parameters. The para
+    @booking = Booking.new(booking_params)
     @flight = Flight.find_by(id: params[:flight])
     @seats = params[:seats].to_i
-    @booking = Booking.new(booking_params)
     if @booking.save
       #remove the passenger ids from the bookings because when the user fills everything you dont have a way to get the passenger ids before they get submitted to the database. Instead make a table that connects each passenger with the booking. The connection occurs here in the controller, after the booking (and the passengers in the nested params) is saved.
       redirect_to flights_path
