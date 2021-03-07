@@ -11,7 +11,9 @@ From: <%= @flight.departing_airport.code %> | To: <%= @flight.arriving_airport.c
   <%= hidden_field_tag('seats', params[:seats]) %>
     <% @seats.times do |i| %>
       <h2>Passenger <%= i+1 %></h2>
-
+      <%= f.fields_for @passenger.build do |p| %>
+        <%= p.text_field :name %>
+      <% end %>
     <% end %>
   <br><br><%= f.submit %>
 
